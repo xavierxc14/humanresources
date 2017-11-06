@@ -5,13 +5,11 @@ import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.io.Serializable;
+import java.util.Date;
 
-/**
- * The primary key class for the job_history database table.
- */
 @Embeddable
 public class JobHistoryPK implements Serializable {
-    //default serial version id, required for serializable classes.
+
     private static final long serialVersionUID = 1L;
 
     @Column(name = "EMPLOYEE_ID")
@@ -19,10 +17,7 @@ public class JobHistoryPK implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "START_DATE")
-    private java.util.Date startDate;
-
-    public JobHistoryPK() {
-    }
+    private Date startDate;
 
     public long getEmployeeId() {
         return this.employeeId;
@@ -32,11 +27,11 @@ public class JobHistoryPK implements Serializable {
         this.employeeId = employeeId;
     }
 
-    public java.util.Date getStartDate() {
+    public Date getStartDate() {
         return this.startDate;
     }
 
-    public void setStartDate(java.util.Date startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 

@@ -2,7 +2,6 @@ package org.tse.humanresources.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 
 /**
@@ -12,6 +11,7 @@ import java.util.List;
 @Table(name = "locations")
 @NamedQuery(name = "Location.findAll", query = "SELECT l FROM Location l")
 public class Location implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -31,17 +31,9 @@ public class Location implements Serializable {
     @Column(name = "STREET_ADDRESS")
     private String streetAddress;
 
-    //bi-directional many-to-one association to Department
-    @OneToMany(mappedBy = "location")
-    private List<Department> departments;
-
-    //bi-directional many-to-one association to Country
     @ManyToOne
     @JoinColumn(name = "COUNTRY_ID")
     private Country country;
-
-    public Location() {
-    }
 
     public long getLocationId() {
         return this.locationId;
@@ -81,28 +73,6 @@ public class Location implements Serializable {
 
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
-    }
-
-    public List<Department> getDepartments() {
-        return this.departments;
-    }
-
-    public void setDepartments(List<Department> departments) {
-        this.departments = departments;
-    }
-
-    public Department addDepartment(Department department) {
-        getDepartments().add(department);
-        department.setLocation(this);
-
-        return department;
-    }
-
-    public Department removeDepartment(Department department) {
-        getDepartments().remove(department);
-        department.setLocation(null);
-
-        return department;
     }
 
     public Country getCountry() {

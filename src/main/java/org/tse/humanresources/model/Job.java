@@ -1,22 +1,14 @@
 package org.tse.humanresources.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
-/**
- * The persistent class for the jobs database table.
- */
 @Entity
 @Table(name = "jobs")
-@NamedQueries({@NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j"),
-        // @NamedQuery(name="Job.setIdAndTitle", query="UPDATE Job j set j.jobId
-        // = ?1 where u.lastname = ?2")
-})
+@NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")
 public class Job implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -32,19 +24,6 @@ public class Job implements Serializable {
 
     @Column(name = "MIN_SALARY")
     private BigDecimal minSalary;
-
-    // bi-directional many-to-one association to Employee
-    @OneToMany(mappedBy = "job")
-    @JsonIgnore
-    private List<Employee> employees;
-
-    // bi-directional many-to-one association to JobHistory
-    @OneToMany(mappedBy = "job")
-    @JsonIgnore
-    private List<JobHistory> jobHistories;
-
-    public Job() {
-    }
 
     public String getJobId() {
         return this.jobId;
@@ -76,50 +55,6 @@ public class Job implements Serializable {
 
     public void setMinSalary(BigDecimal minSalary) {
         this.minSalary = minSalary;
-    }
-
-    public List<Employee> getEmployees() {
-        return this.employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public Employee addEmployee(Employee employee) {
-        getEmployees().add(employee);
-        employee.setJob(this);
-
-        return employee;
-    }
-
-    public Employee removeEmployee(Employee employee) {
-        getEmployees().remove(employee);
-        employee.setJob(null);
-
-        return employee;
-    }
-
-    public List<JobHistory> getJobHistories() {
-        return this.jobHistories;
-    }
-
-    public void setJobHistories(List<JobHistory> jobHistories) {
-        this.jobHistories = jobHistories;
-    }
-
-    public JobHistory addJobHistory(JobHistory jobHistory) {
-        getJobHistories().add(jobHistory);
-        jobHistory.setJob(this);
-
-        return jobHistory;
-    }
-
-    public JobHistory removeJobHistory(JobHistory jobHistory) {
-        getJobHistories().remove(jobHistory);
-        jobHistory.setJob(null);
-
-        return jobHistory;
     }
 
 }

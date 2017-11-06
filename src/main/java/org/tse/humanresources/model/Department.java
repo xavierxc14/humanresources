@@ -3,16 +3,12 @@ package org.tse.humanresources.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
-
-/**
- * The persistent class for the departments database table.
- */
 @Entity
 @Table(name = "departments")
 @NamedQuery(name = "Department.findAll", query = "SELECT d FROM Department d")
 public class Department implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -26,21 +22,9 @@ public class Department implements Serializable {
     @Column(name = "MANAGER_ID")
     private BigDecimal managerId;
 
-    //bi-directional many-to-one association to Location
     @ManyToOne
     @JoinColumn(name = "LOCATION_ID")
     private Location location;
-
-    //bi-directional many-to-one association to Employee
-    @OneToMany(mappedBy = "department")
-    private List<Employee> employees;
-
-    //bi-directional many-to-one association to JobHistory
-    @OneToMany(mappedBy = "department")
-    private List<JobHistory> jobHistories;
-
-    public Department() {
-    }
 
     public long getDepartmentId() {
         return this.departmentId;
@@ -72,50 +56,6 @@ public class Department implements Serializable {
 
     public void setLocation(Location location) {
         this.location = location;
-    }
-
-    public List<Employee> getEmployees() {
-        return this.employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public Employee addEmployee(Employee employee) {
-        getEmployees().add(employee);
-        employee.setDepartment(this);
-
-        return employee;
-    }
-
-    public Employee removeEmployee(Employee employee) {
-        getEmployees().remove(employee);
-        employee.setDepartment(null);
-
-        return employee;
-    }
-
-    public List<JobHistory> getJobHistories() {
-        return this.jobHistories;
-    }
-
-    public void setJobHistories(List<JobHistory> jobHistories) {
-        this.jobHistories = jobHistories;
-    }
-
-    public JobHistory addJobHistory(JobHistory jobHistory) {
-        getJobHistories().add(jobHistory);
-        jobHistory.setDepartment(this);
-
-        return jobHistory;
-    }
-
-    public JobHistory removeJobHistory(JobHistory jobHistory) {
-        getJobHistories().remove(jobHistory);
-        jobHistory.setDepartment(null);
-
-        return jobHistory;
     }
 
 }
