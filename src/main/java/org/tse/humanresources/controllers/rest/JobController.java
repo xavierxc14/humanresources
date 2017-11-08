@@ -1,7 +1,6 @@
 package org.tse.humanresources.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.tse.humanresources.model.Job;
 import org.tse.humanresources.repositories.JobRepository;
@@ -9,10 +8,8 @@ import org.tse.humanresources.repositories.JobRepository;
 import java.math.BigDecimal;
 import java.util.List;
 
-@RestController
-@RequestMapping(path = "/api/job",
-        produces = MediaType.APPLICATION_JSON_VALUE,
-        consumes = MediaType.APPLICATION_JSON_VALUE)
+@RestController("jobRestController")
+@RequestMapping("/api/custom/jobs")
 public class JobController {
 
     @Autowired
