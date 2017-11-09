@@ -16,7 +16,7 @@ public class JobController {
     private JobRepository jobRepository;
 
     @PatchMapping("/update/{id}")
-    public Job updateIdAndName(@PathVariable String id, @RequestBody Job job) {
+    public Job updateName(@PathVariable String id, @RequestBody Job job) {
         Job updatedJob = jobRepository.findOne(id);
         updatedJob.setJobTitle(job.getJobTitle());
         return jobRepository.saveAndFlush(updatedJob);
