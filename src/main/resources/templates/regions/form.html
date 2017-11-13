@@ -9,24 +9,15 @@
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Edit Country</h3>
+            <h3 class="panel-title">Edit Job</h3>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" action="/countries/save" method="post" th:object="${country}">
-                <input type="hidden" th:field="*{countryId}"/>
+            <form class="form-horizontal" action="/regions/save" method="post" th:object="${region}">
+                <input type="hidden" th:field="*{regionId}"/>
                 <div class="form-group">
                     <label for="name" class="col-sm-2 control-label">Name:</label>
                     <div class="col-sm-10">
-                        <input id="name" class="form-control" th:field="*{countryName}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="region" class="col-sm-2 control-label">Region:</label>
-                    <div class="col-sm-10">
-                        <select id="region" class="form-control" th:field="*{region.regionId}">
-                            <option th:each="region : ${regions}" th:value="${region.regionId}"
-                                    th:text="${region.regionName}"></option>
-                        </select>
+                        <input id="name" class="form-control" th:field="*{regionName}"/>
                     </div>
                 </div>
                 <div class="form-group">

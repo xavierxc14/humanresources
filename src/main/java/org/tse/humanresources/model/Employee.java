@@ -1,5 +1,7 @@
 package org.tse.humanresources.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -27,6 +29,7 @@ public class Employee implements Serializable {
     private String firstName;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "HIRE_DATE")
     private Date hireDate;
 

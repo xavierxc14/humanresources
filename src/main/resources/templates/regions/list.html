@@ -13,17 +13,15 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Region</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="country,iter: ${countries}">
+            <tr th:each="region,iter: ${regions}">
                 <td th:text="${iter.index+1}">N/A</td>
-                <td th:text="${country.countryName}">N/A</td>
-                <td th:text="${country.region.regionName}">N/A</td>
+                <td th:text="${region.regionName}">N/A</td>
                 <td class="actions-col">
-                    <a th:href="@{/countries/edit/__${country.countryId}__}" class="btn btn-primary">
+                    <a th:href="@{/regions/edit/__${region.regionId}__}" class="btn btn-primary">
                         <span class="glyphicon glyphicon-edit"></span> Edit</a>
                 </td>
             </tr>
