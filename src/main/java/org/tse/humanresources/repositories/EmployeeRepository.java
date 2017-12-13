@@ -8,4 +8,6 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     List<Employee> findByFirstName(String firstName);
+
+    List<Employee> findAllByOrderBySalary();
 }
