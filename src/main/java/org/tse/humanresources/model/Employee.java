@@ -53,6 +53,12 @@ public class Employee implements Serializable {
     @JoinColumn(name = "JOB_ID")
     private Job job;
 
+    @Column(name = "password")
+//    @Length(min = 5, message = "*Your password must have at least 5 characters")
+//    @NotEmpty(message = "*Please provide your password")
+//    @Transient
+    private String password;
+
     public long getEmployeeId() {
         return this.employeeId;
     }
@@ -141,4 +147,11 @@ public class Employee implements Serializable {
         this.job = job;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

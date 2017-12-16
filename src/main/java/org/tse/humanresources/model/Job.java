@@ -1,8 +1,11 @@
 package org.tse.humanresources.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "jobs")
@@ -24,6 +27,10 @@ public class Job implements Serializable {
 
     @Column(name = "MIN_SALARY")
     private BigDecimal minSalary;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "job")
+    private List<JobPrivilege> jobPrivileges;
 
     public String getJobId() {
         return this.jobId;
@@ -57,4 +64,11 @@ public class Job implements Serializable {
         this.minSalary = minSalary;
     }
 
+    public List<JobPrivilege> getJobPrivileges() {
+        return jobPrivileges;
+    }
+
+    public void setJobPrivileges(List<JobPrivilege> jobPrivileges) {
+        this.jobPrivileges = jobPrivileges;
+    }
 }
