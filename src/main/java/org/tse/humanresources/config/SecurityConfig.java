@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -27,16 +28,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/img/**").permitAll()
+                .antMatchers("/regions", "/countries", "/locations")
+                .hasAnyAuthority("AD_READ_PRIVILEGE", "AC_READ_PRIVILEGE", "FI_READ_PRIVILEGE", "SA_READ_PRIVILEGE")
+                .antMatchers("/jobs", "employees", "/departments")
+                .hasAnyAuthority("AD_READ_PRIVILEGE", "AC_READ_PRIVILEGE", "FI_READ_PRIVILEGE")
+                .antMatchers("/jobs/**", "/employees/**")
+                .hasAnyAuthority("AD_WRITE_PRIVILEGE", "AC_WRITE_PRIVILEGE", "FI_WRITE_PRIVILEGE")
+                .antMatchers("/departments/**", "/regions/**", "/countries/**", "/locations/**")
+                .hasAnyAuthority("AD_WRITE_PRIVILEGE")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .and()
                 .logout().permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
         ;
     }
 
@@ -47,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .usersByUsernameQuery(usersQuery)
                 .authoritiesByUsernameQuery(rolesQuery)
-//                .passwordEncoder(passwordEncoder)
+                .passwordEncoder(passwordEncoder)
         ;
     }
 }

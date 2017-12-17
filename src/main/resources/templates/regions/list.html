@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/header :: header-css">
 </head>
 <body>
@@ -21,8 +22,10 @@
                 <td th:text="${iter.index+1}">N/A</td>
                 <td th:text="${region.regionName}">N/A</td>
                 <td class="actions-col">
-                    <a th:href="@{/regions/edit/__${region.regionId}__}" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                    <span sec:authorize="hasAnyAuthority('AD_WRITE_PRIVILEGE')">
+                        <a th:href="@{/regions/edit/__${region.regionId}__}" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                    </span>
                 </td>
             </tr>
             </tbody>

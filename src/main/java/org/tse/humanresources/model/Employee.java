@@ -59,6 +59,8 @@ public class Employee implements Serializable {
 //    @Transient
     private String password;
 
+    private Boolean enabled;
+
     public long getEmployeeId() {
         return this.employeeId;
     }
@@ -153,5 +155,13 @@ public class Employee implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

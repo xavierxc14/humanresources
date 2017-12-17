@@ -18,4 +18,14 @@ public class DefaultController {
         return "/login";
     }
 
+    @GetMapping("403")
+    public String error403() {
+        return "/error/403";
+    }
+
+    @GetMapping("404")
+    public String error404() {
+        return "/error/404";
+    }
+
 }

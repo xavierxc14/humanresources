@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="header-css">
     <meta charset="UTF-8"/>
     <title>Human Resources App</title>
@@ -24,23 +25,35 @@
             </div>
             <div class="collapse navbar-collapse" id="app-navbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/countries">Countries</a></li>
-                    <li><a href="/departments">Departments</a></li>
-                    <li><a href="/employees">Employees</a></li>
-                    <li><a href="/jobs">Jobs</a></li>
-                    <li><a href="/locations">Locations</a></li>
-                    <li><a href="/regions">Regions</a></li>
+                    <li sec:authorize="hasAnyAuthority('AD_READ_PRIVILEGE', 'AC_READ_PRIVILEGE', 'FI_READ_PRIVILEGE')">
+                        <a href="/jobs">Jobs</a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('AD_READ_PRIVILEGE', 'AC_READ_PRIVILEGE', 'FI_READ_PRIVILEGE')">
+                        <a href="/employees">Employees</a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('AD_READ_PRIVILEGE', 'AC_READ_PRIVILEGE', 'FI_READ_PRIVILEGE')">
+                        <a href="/departments">Departments</a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('AD_READ_PRIVILEGE', 'AC_READ_PRIVILEGE', 'FI_READ_PRIVILEGE', 'SA_READ_PRIVILEGE')">
+                        <a href="/regions">Regions</a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('AD_READ_PRIVILEGE', 'AC_READ_PRIVILEGE', 'FI_READ_PRIVILEGE', 'SA_READ_PRIVILEGE')">
+                        <a href="/countries">Countries</a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('AD_READ_PRIVILEGE', 'AC_READ_PRIVILEGE', 'FI_READ_PRIVILEGE', 'SA_READ_PRIVILEGE')">
+                        <a href="/locations">Locations</a>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
+                    <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+                    <li sec:authorize="isAuthenticated()" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            Logged in user <span class="caret"></span></a>
+                            <span class="glyphicon glyphicon-user"></span> <span sec:authentication="name"></span> <span
+                                class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Profile</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="/logout">Sign Out</a></li>
                         </ul>
                     </li>
                 </ul>
