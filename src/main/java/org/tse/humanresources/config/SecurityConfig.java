@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/img/**").permitAll()
+                .antMatchers("/", "/img/**", "/v2/api-docs", "/swagger-resources", "/swagger-resources/**", "/swagger-ui.html").permitAll()
                 .antMatchers("/regions", "/countries", "/locations")
                 .hasAnyAuthority("AD_READ_PRIVILEGE", "AC_READ_PRIVILEGE", "FI_READ_PRIVILEGE", "SA_READ_PRIVILEGE")
                 .antMatchers("/jobs", "employees", "/departments")

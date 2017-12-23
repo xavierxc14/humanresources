@@ -43,6 +43,9 @@
                     <li sec:authorize="hasAnyAuthority('AD_READ_PRIVILEGE', 'AC_READ_PRIVILEGE', 'FI_READ_PRIVILEGE', 'SA_READ_PRIVILEGE')">
                         <a href="/locations">Locations</a>
                     </li>
+                    <li sec:authorize="hasAnyAuthority('AD_READ_PRIVILEGE')">
+                        <a href="/employees/salaries">Salaries Graph</a>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
@@ -51,7 +54,7 @@
                             <span class="glyphicon glyphicon-user"></span> <span sec:authentication="name"></span> <span
                                 class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="/profile">Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/logout">Sign Out</a></li>
                         </ul>

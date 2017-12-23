@@ -81,8 +81,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         List<Employee> employees = employeeRepository.findAll();
         List<Employee> updatedEmployees = new ArrayList<>();
         employees.forEach(employee -> {
-            employee.setPassword(passwordEncoder.encode(employee.getEmail() + "12345"));
-            employee.setEnabled(true);
+            if (employee.getPassword() == null || employee.getPassword().isEmpty()) {
+                employee.setPassword(passwordEncoder.encode(employee.getEmail() + "12345"));
+                employee.setEnabled(true);
+            }
             updatedEmployees.add(employee);
         });
         employeeRepository.save(updatedEmployees);
