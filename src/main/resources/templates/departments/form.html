@@ -12,7 +12,7 @@
             <h3 class="panel-title">Edit Department</h3>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" action="/departments/save" method="post" th:object="${department}">
+            <form class="form-horizontal" th:action="@{/departments/save}" method="post" th:object="${department}">
                 <input type="hidden" th:field="*{departmentId}"/>
                 <div class="form-group">
                     <label for="name" class="col-sm-2 control-label">Name:</label>

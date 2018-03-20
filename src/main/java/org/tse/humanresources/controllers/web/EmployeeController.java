@@ -58,4 +58,9 @@ public class EmployeeController {
         return "employees/salaries";
     }
 
+    @GetMapping("deciles")
+    public String indexBis() {
+        return "employees/decile";
+    }
+
 }

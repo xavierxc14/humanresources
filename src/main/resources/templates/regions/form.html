@@ -12,7 +12,7 @@
             <h3 class="panel-title">Edit Job</h3>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" action="/regions/save" method="post" th:object="${region}">
+            <form class="form-horizontal" th:action="@{/regions/save}" method="post" th:object="${region}">
                 <input type="hidden" th:field="*{regionId}"/>
                 <div class="form-group">
                     <label for="name" class="col-sm-2 control-label">Name:</label>
